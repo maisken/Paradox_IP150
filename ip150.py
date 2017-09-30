@@ -68,7 +68,7 @@ class Paradox_IP150:
         return {'p': hashlib.md5(spass.encode('ascii')).hexdigest().upper(),
                 'u': self._paradox_rc4(user, spass)}
 
-    def login(self, user, pwd):
+    def login(self, user, pwd, keep_alive=True):
         if self.logged_in:
             raise Paradox_IP150_Login('Already logged in; please use logout() first.')
 
@@ -89,15 +89,18 @@ class Paradox_IP150:
             raise Paradox_IP150_Login('Could not login, wrong credentials provided.')
         # Give enough time to the server to set up.
         time.sleep(3)
-        self._keepalive = KeepAlive(self.ip150url)
-        self._keepalive.start()
+        if keep_alive:
+            self._keepalive = KeepAlive(self.ip150url)
+            self._keepalive.start()
         self.logged_in = True
 
     def logout(self):
         if not self.logged_in:
             raise Paradox_IP150_Login('Not logged in; please use login() first.')
 
-        self._keepalive.cancel()
+        if self._keepalive:
+            self._keepalive.cancel()
+            self._keepalive = None
         logout = requests.get('{}/logout.html'.format(self.ip150url), verify=False)
         if logout.status_code != 200:
             raise Paradox_IP150_Login('Error logging out')
