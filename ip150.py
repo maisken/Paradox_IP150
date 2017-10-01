@@ -127,7 +127,7 @@ class Paradox_IP150:
         status_page = requests.get(
             '{}/statuslive.html'.format(self.ip150url), verify=False)
         status_parsed = BeautifulSoup(status_page.text, 'html.parser')
-        if status_parsed.find('form', attrs={'name': 'statuslive'}) == None:
+        if status_parsed.find('form', attrs={'name': 'statuslive'}) is None:
             raise Paradox_IP150_Login('Could not retrieve status information')
         script = status_parsed.find('script').string
         res = {}
