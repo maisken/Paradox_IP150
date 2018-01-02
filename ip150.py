@@ -225,3 +225,17 @@ class Paradox_IP150:
             self._updates = None
         else:
             raise Paradox_IP150_Error('Not currently getting updates. Use get_updates() first.')
+
+    @_logged_only
+    def set_area_action(self, area, action):
+        if isinstance(area,str):
+            area = int(area)
+        area = area -1
+        if area < 0:
+            raise Paradox_IP150_Error('Invalid area provided.')
+        if action not in self._areas_action_map:
+            raise Paradox_IP150_Error('Invalid action "{}" provided. Valid actions are {}'.format(action, list(self._areas_action_map.keys())))
+        action = self._areas_action_map[action]
+        act_res = requests.get('{}/statuslive.html'.format(self.ip150url), params={'area': '{:02d}'.format(area), 'value': action}, verify=False)
+        if act_res.status_code != 200:
+            raise Paradox_IP150_Error('Error setting the area action')
