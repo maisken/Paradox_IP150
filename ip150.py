@@ -185,7 +185,7 @@ class Paradox_IP150:
             res[table] = [(i, self._tables_map[table]['map'][x]) for i,x in enumerate(tmp, start=1)]
         return res
 
-    def _get_updates(self, on_update, interval):
+    def _get_updates(self, on_update, userdata, interval):
         prev_state = {}
 
         while not self._stop_updates.wait(interval):
@@ -203,17 +203,17 @@ class Paradox_IP150:
                     updated_state[d1] = cur_state[d1]
 
             if len(updated_state) > 0:
-                on_update(updated_state)
+                on_update(updated_state, userdata)
 
             prev_state = cur_state
 
     @_logged_only
-    def get_updates(self, on_update=None, poll_interval=1.0):
+    def get_updates(self, on_update=None, userdata=None, poll_interval=1.0):
         if not on_update:
             raise Paradox_IP150_Error('The callable on_update must be provided.')
         if poll_interval <= 0.0:
             raise Paradox_IP150_Error('The polling interval must be greater than 0.0 seconds.')
-        self._updates = threading.Thread(target=self._get_updates, args=(on_update, poll_interval), daemon=True)
+        self._updates = threading.Thread(target=self._get_updates, args=(on_update, userdata, poll_interval), daemon=True)
         self._updates.start()
 
     @_logged_only
