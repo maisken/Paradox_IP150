@@ -3,7 +3,7 @@
 	"PANEL_CODE" : "0000",
 	"PANEL_PASSWORD" : "Password",
 
-	"MQTT_ADDRESS" : "http://127.0.0.1",
+	"MQTT_ADDRESS" : "mqtt://127.0.0.1",
 	"MQTT_USERNAME" : "MQTT_user",
 	"MQTT_PASSWORD" : "MQTT_pwd",
 
