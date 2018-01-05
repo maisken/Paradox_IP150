@@ -1,0 +1,14 @@
+{
+	"IP150_ADDRESS" : "http://127.0.0.1",
+	"PANEL_CODE" : "0000",
+	"PANEL_PASSWORD" : "Password",
+
+	"MQTT_ADDRESS" : "http://127.0.0.1",
+	"MQTT_USERNAME" : "MQTT_user",
+	"MQTT_PASSWORD" : "MQTT_pwd",
+
+	"ALARM_PUBLISH_TOPIC"   : "paradox/alarm/state",
+	"ALARM_SUBSCRIBE_TOPIC" : "paradox/alarm/cmnd",
+	"CTRL_PUBLISH_TOPIC"    : "paradox/crtl/state",
+	"CTRL_SUBSCRIBE_TOPIC"  : "paradox/ctrl/cmnd"
+}
