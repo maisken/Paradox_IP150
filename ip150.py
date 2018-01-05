@@ -70,8 +70,8 @@ class Paradox_IP150:
         'Arm_stay' : 's'
     }
 
-    def __init__(self, addr, port=80, method='http'):
-        self.ip150url = '{}://{}:{}'.format(method, addr, port)
+    def __init__(self, ip150url):
+        self.ip150url = ip150url
         self.logged_in = False
         self._keepalive = None
         self._updates = None
