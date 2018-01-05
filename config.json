@@ -2,7 +2,7 @@
   "name": "Paradox IP150 MQTT Adapter",
   "version": "0.1",
   "slug": "paradox_ip150_mqtt",
-  "description": "An adapter to expose an MQTT interface for the Paradox IP150 web interface.",
+  "description": "Expose an MQTT interface for the Paradox IP150 web interface.",
   "url": "https://github.com/alfredopironti/Paradox_IP150",
   "startup": "services",
   "boot": "auto",
