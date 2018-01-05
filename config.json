@@ -1,0 +1,37 @@
+{
+  "name": "Paradox IP150 MQTT Adapter",
+  "version": "0.1",
+  "slug": "paradox_ip150_mqtt",
+  "description": "An adapter to expose an MQTT interface for the Paradox IP150 web interface.",
+  "url": "https://github.com/alfredopironti/Paradox_IP150",
+  "startup": "services",
+  "boot": "auto",
+  "options": {
+	"IP150_ADDRESS" : "http://127.0.0.1",
+	"PANEL_CODE" : "0000",
+	"PANEL_PASSWORD" : "Password",
+
+	"MQTT_ADDRESS" : "mqtt://127.0.0.1",
+	"MQTT_USERNAME" : "MQTT_user",
+	"MQTT_PASSWORD" : "MQTT_pwd",
+
+	"ALARM_PUBLISH_TOPIC"   : "paradox/alarm/state",
+	"ALARM_SUBSCRIBE_TOPIC" : "paradox/alarm/cmnd",
+	"CTRL_PUBLISH_TOPIC"    : "paradox/crtl/state",
+	"CTRL_SUBSCRIBE_TOPIC"  : "paradox/ctrl/cmnd"
+	},
+  "schema": {
+	"IP150_ADDRESS" : "url",
+	"PANEL_CODE" : "str",
+	"PANEL_PASSWORD" : "str",
+
+	"MQTT_ADDRESS" : "url",
+	"MQTT_USERNAME" : "str",
+	"MQTT_PASSWORD" : "str",
+
+	"ALARM_PUBLISH_TOPIC"   : "str",
+	"ALARM_SUBSCRIBE_TOPIC" : "str",
+	"CTRL_PUBLISH_TOPIC"    : "str",
+	"CTRL_SUBSCRIBE_TOPIC"  : "str"
+	}
+}
