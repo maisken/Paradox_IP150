@@ -1,1 +1,1 @@
-python3 ip150_mqtt.py data/options.json
+python3 ip150_mqtt.py /data/options.json
