@@ -8,7 +8,7 @@ COPY run.sh ip150.py ip150_mqtt.py requirements.txt /
 
 RUN apk add --no-cache python3 &&\
     python3 -m ensurepip &&\
-    pip install -r requirements.txt
+    pip3 install -r requirements.txt
 
 RUN chmod a+x /run.sh
 
