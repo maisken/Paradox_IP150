@@ -17,7 +17,7 @@
 
 	"ALARM_PUBLISH_TOPIC"   : "paradox/alarm/state",
 	"ALARM_SUBSCRIBE_TOPIC" : "paradox/alarm/cmnd",
-	"CTRL_PUBLISH_TOPIC"    : "paradox/crtl/state",
+	"CTRL_PUBLISH_TOPIC"    : "paradox/ctrl/state",
 	"CTRL_SUBSCRIBE_TOPIC"  : "paradox/ctrl/cmnd"
 	},
   "schema": {
