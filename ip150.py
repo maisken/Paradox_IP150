@@ -38,14 +38,14 @@ class Paradox_IP150:
         # A map from human readable info about the alarm, to "table" (in fact, array) names used in IP150 software
         #'triggered_alarms': 'tbl_alarmes', # Redundant list of zones with an alarm currently triggered. A zone in alarm will also be reported in the 'tbl_useraccess' table
         #'troubles': 'tbl_troubles', # Could use this list to publish alarm troubles, not required for now
-        # Could use the next list to publish zone status (0=Closed, 1=Open), not required for now
-        #'zone_status': {
-        #    'name': 'tbl_statuszone',
-        #    'map' : {
-        #        0: 'Closed',
-        #        1: 'Open'
-        #    }
-        #}
+        # The next list provides the status (0=Closed, 1=Open) for each zone
+        'zones_status': {
+            'name': 'tbl_statuszone',
+            'map' : {
+                0: 'Closed',
+                1: 'Open'
+            }
+        },
         # The next list provides the status (as an integer, 0 for area not enabled) for each supported area
         'areas_status': {
             'name': 'tbl_useraccess',

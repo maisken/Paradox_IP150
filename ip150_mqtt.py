@@ -11,14 +11,26 @@ class IP150_MQTT_Error(Exception):
 
 class IP150_MQTT():
 
-	_alarm_state_map = {
-		'Disarmed'   : 'disarmed',
-		'Armed'      : 'armed_away',
-		'Armed_sleep': 'armed_home',
-		'Armed_stay' : 'armed_home',
-		'Entry_delay': 'pending',
-		'Exit_delay' : 'pending'
+	_status_map = {
+		'areas_status' : {
+			'topic' : 'ALARM_PUBLISH_TOPIC',
+			'map'   : {
+				'Disarmed'   : 'disarmed',
+				'Armed'      : 'armed_away',
+				'Armed_sleep': 'armed_home',
+				'Armed_stay' : 'armed_home',
+				'Entry_delay': 'pending',
+				'Exit_delay' : 'pending'
+			}
+		},
+		'zones_status' : {
+			'topic' : 'ZONE_PUBLISH_TOPIC',
+			'map'	: {
+				'Closed' : 'off',
+				'Open'   : 'on'
+			}
 		}
+	}
 
 	_alarm_action_map = {
 		'DISARM': 'Disarm',
@@ -31,13 +43,15 @@ class IP150_MQTT():
 			self._cfg = json.load(opt_file)
 			self._will = (self._cfg['CTRL_PUBLISH_TOPIC'], 'Disconnected', 1, True)
 
-	def on_alarm_new_state(self, state, client):
-		areas_status = state.get('areas_status',None)
-		if areas_status:
-			for area in areas_status:
-				publish_state = self._alarm_state_map.get(area[1],None)
-				if publish_state:
-					client.publish(self._cfg['ALARM_PUBLISH_TOPIC']+'/'+str(area[0]), publish_state, 1, True)
+	def on_paradox_new_state(self, state, client):
+		print(state)
+		for d1 in state.keys():
+			d1_map = self._status_map.get(d1,None)
+			if d1_map:
+				for d2 in state[d1]:
+					publish_state = d1_map['map'].get(d2[1],None)
+					if publish_state:
+						client.publish(self._cfg[d1_map['topic']]+'/'+str(d2[0]), publish_state, 1, True)
 
 	def on_mqtt_connect(self, client, userdata, flags, rc):
 		if rc != 0:
@@ -47,7 +61,7 @@ class IP150_MQTT():
 
 		client.publish(self._cfg['CTRL_PUBLISH_TOPIC'], 'Connected', 1, True)
 
-		self.ip.get_updates(self.on_alarm_new_state, client)
+		self.ip.get_updates(self.on_paradox_new_state, client)
 
 
 	def on_mqtt_alarm_message(self, client, userdata, message):
