@@ -57,7 +57,10 @@ class Paradox_IP150:
                 4: 'Armed_sleep',
                 5: 'Armed_stay',
                 6: 'Entry_delay',
-                7: 'Exit_delay'
+                7: 'Exit_delay',
+                8: 'Ready',
+                9: 'Not_ready',
+                10: 'Instant'
             }
         }
     }
