@@ -44,7 +44,6 @@ class IP150_MQTT():
 			self._will = (self._cfg['CTRL_PUBLISH_TOPIC'], 'Disconnected', 1, True)
 
 	def on_paradox_new_state(self, state, client):
-		print(state)
 		for d1 in state.keys():
 			d1_map = self._status_map.get(d1,None)
 			if d1_map:
