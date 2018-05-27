@@ -36,9 +36,9 @@ broker: localhost
 port: 1883
 ```
 #### configuration.yaml
-
-alarm_control_panel:
 ```
+alarm_control_panel:
+
 platform: mqtt
 name: House Paradox
 state_topic: “paradox/alarm/state/1”
