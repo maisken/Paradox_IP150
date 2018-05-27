@@ -1,6 +1,6 @@
 # Paradox_IP150 Docker addon for HASS.IO
 
-Support for this Plugin can be found at:
+#Support for this Plugin can be found at:
 
 https://community.home-assistant.io/t/paradox-alarm-mqtt-hassio-addon/38569
 
@@ -25,7 +25,7 @@ There is currently no logging displayed.
 
 
 
-##Basic configuration should allow you to get going:
+###Basic configuration should allow you to get going:
 
 Running built in mqtt
 
