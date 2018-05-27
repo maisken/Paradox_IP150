@@ -1,10 +1,10 @@
 # Paradox_IP150 Docker addon for HASS.IO
 
-#Support for this Plugin can be found at:
+# Support for this Plugin can be found at:
 
 https://community.home-assistant.io/t/paradox-alarm-mqtt-hassio-addon/38569
 
-##This currently only supports Manual install:
+## This currently only supports Manual install:
 
 
 I’ve set up a very basic hassio add-on that will run an mqtt interface for the Paradox ip150 module, via the ip150 web interface. If you are interested, you can find it at https://github.com/alfredopironti/Paradox_IP150 79
@@ -25,17 +25,17 @@ There is currently no logging displayed.
 
 
 
-###Basic configuration should allow you to get going:
+### Basic configuration should allow you to get going:
 
 Running built in mqtt
 
-####configuration.yaml
+#### configuration.yaml
 ```
 mqtt:
 broker: localhost
 port: 1883
 ```
-####configuration.yaml
+#### configuration.yaml
 
 alarm_control_panel:
 ```
@@ -48,7 +48,7 @@ payload_arm_home: “ARM_HOME”
 payload_arm_away: “ARM_AWAY”
 #ARM_HOME = ARM_sleep @Line38 ip150.mqtt.py
 ```
-####configuration.yaml
+#### configuration.yaml
 ```
 platform: mqtt
 state_topic: “paradox/zone/state/2”
@@ -58,7 +58,7 @@ payload_on: “on”
 payload_off: “off”
 Repeat for all your Zones/Openings and so forth
 ```
-####Hass.io: add-on details => Paradox IP150MQTT Adapter (web based configuration)
+#### Hass.io: add-on details => Paradox IP150MQTT Adapter (web based configuration)
 ```
 {
 “IP150_ADDRESS”: “http://[IP-OF-IP150]”,
@@ -74,7 +74,7 @@ Repeat for all your Zones/Openings and so forth
 “CTRL_SUBSCRIBE_TOPIC”: “paradox/ctrl/cmnd”
 }
 ```
-####Hass.io: add-on details => Mosquitto broker (web based configuration)
+#### Hass.io: add-on details => Mosquitto broker (web based configuration)
 ```
 {
 “plain”: true,
@@ -89,3 +89,8 @@ Repeat for all your Zones/Openings and so forth
 “keyfile”: “privkey.pem”
 }
 ```
+
+todo
+[ ] make auto install
+[ ] create support
+[ ] clear issues
