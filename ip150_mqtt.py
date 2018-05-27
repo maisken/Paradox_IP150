@@ -35,8 +35,8 @@ class IP150_MQTT():
 	_alarm_action_map = {
 		'DISARM': 'Disarm',
 		'ARM_AWAY': 'Arm',
-		'ARM_HOME': 'Arm_sleep'
-		'ARM_SLEEP': 'Arm_sleep'
+		'ARM_HOME': 'Arm_sleep',
+		'ARM_SLEEP': 'Arm_sleep',
 		'ARM_STAY': 'Arm_stay' 
 		}
 
