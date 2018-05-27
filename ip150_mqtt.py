@@ -36,6 +36,8 @@ class IP150_MQTT():
 		'DISARM': 'Disarm',
 		'ARM_AWAY': 'Arm',
 		'ARM_HOME': 'Arm_sleep'
+		'ARM_SLEEP': 'Arm_sleep'
+		'ARM_STAY': 'Arm_stay' 
 		}
 
 	def __init__(self, opt_file):
