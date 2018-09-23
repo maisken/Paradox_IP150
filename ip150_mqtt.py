@@ -52,6 +52,12 @@ class IP150_MQTT():
 					if publish_state:
 						client.publish(self._cfg[d1_map['topic']]+'/'+str(d2[0]), publish_state, 1, True)
 
+	def on_paradox_update_error(self, e, client):
+		# We try to do a proper shutdow,
+		# like if the user asked us to disconnect via MQTT
+		#TODO: log the exception
+		self.mqtt_ctrl_disconnect(client)
+
 	def on_mqtt_connect(self, client, userdata, flags, rc):
 		if rc != 0:
 			raise IP150_MQTT_Error('Error while connecting to the MQTT broker. Reason code: {}'.format(str(rc)))
@@ -60,7 +66,7 @@ class IP150_MQTT():
 
 		client.publish(self._cfg['CTRL_PUBLISH_TOPIC'], 'Connected', 1, True)
 
-		self.ip.get_updates(self.on_paradox_new_state, client)
+		self.ip.get_updates(self.on_paradox_new_state, self.on_paradox_update_error, client)
 
 
 	def on_mqtt_alarm_message(self, client, userdata, message):

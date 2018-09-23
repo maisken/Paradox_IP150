@@ -158,8 +158,6 @@ class Paradox_IP150:
             self._keepalive = None
         if self._updates:
             self._stop_updates.set()
-            self._updates.join()
-            self._stop_updates.clear()
             self._updates = None
         logout = requests.get(
             '{}/logout.html'.format(self.ip150url), verify=False)
@@ -188,43 +186,47 @@ class Paradox_IP150:
             res[table] = [(i, self._tables_map[table]['map'][x]) for i,x in enumerate(tmp, start=1)]
         return res
 
-    def _get_updates(self, on_update, userdata, interval):
-        prev_state = {}
+    def _get_updates(self, on_update, on_error, userdata, interval):
+        try:
+            prev_state = {}
 
-        while not self._stop_updates.wait(interval):
-            updated_state = {}
-            cur_state = self.get_info()
-            for d1 in cur_state.keys():
-                if d1 in prev_state:
-                    for cur_d2, prev_d2 in zip(cur_state[d1], prev_state[d1]):
-                        if cur_d2 != prev_d2:
-                            if d1 in updated_state:
-                                updated_state[d1].append(cur_d2)
-                            else:
-                                updated_state[d1] = [cur_d2]
-                else:
-                    updated_state[d1] = cur_state[d1]
+            while not self._stop_updates.wait(interval):
+                updated_state = {}
+                cur_state = self.get_info()
+                for d1 in cur_state.keys():
+                    if d1 in prev_state:
+                        for cur_d2, prev_d2 in zip(cur_state[d1], prev_state[d1]):
+                            if cur_d2 != prev_d2:
+                                if d1 in updated_state:
+                                    updated_state[d1].append(cur_d2)
+                                else:
+                                    updated_state[d1] = [cur_d2]
+                    else:
+                        updated_state[d1] = cur_state[d1]
 
-            if len(updated_state) > 0:
-                on_update(updated_state, userdata)
+                if len(updated_state) > 0:
+                    on_update(updated_state, userdata)
 
-            prev_state = cur_state
+                prev_state = cur_state
+        except Exception as e:
+            if on_error:
+                on_error(e, userdata)
+        finally:
+            self._stop_updates.clear()
 
     @_logged_only
-    def get_updates(self, on_update=None, userdata=None, poll_interval=1.0):
+    def get_updates(self, on_update=None, on_error=None, userdata=None, poll_interval=1.0):
         if not on_update:
             raise Paradox_IP150_Error('The callable on_update must be provided.')
         if poll_interval <= 0.0:
             raise Paradox_IP150_Error('The polling interval must be greater than 0.0 seconds.')
-        self._updates = threading.Thread(target=self._get_updates, args=(on_update, userdata, poll_interval), daemon=True)
+        self._updates = threading.Thread(target=self._get_updates, args=(on_update, on_error, userdata, poll_interval), daemon=True)
         self._updates.start()
 
     @_logged_only
     def cancel_updates(self):
         if self._updates:
             self._stop_updates.set()
-            self._updates.join()
-            self._stop_updates.clear()
             self._updates = None
         else:
             raise Paradox_IP150_Error('Not currently getting updates. Use get_updates() first.')
