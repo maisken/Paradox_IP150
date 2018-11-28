@@ -43,7 +43,15 @@ class Paradox_IP150:
             'name': 'tbl_statuszone',
             'map' : {
                 0: 'Closed',
-                1: 'Open'
+                1: 'Open',
+                2: 'In_alarm',
+                3: 'Closed_Trouble',
+                4: 'Open_Trouble',
+                5: 'Closed_Memory',
+                6: 'Open_Memory',
+                7: 'Bypass',
+                8: 'Closed_Trouble2',
+                9: 'Open_Trouble2'
             }
         },
         # The next list provides the status (as an integer, 0 for area not enabled) for each supported area

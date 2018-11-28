@@ -26,8 +26,16 @@ class IP150_MQTT():
 		'zones_status' : {
 			'topic' : 'ZONE_PUBLISH_TOPIC',
 			'map'	: {
-				'Closed' : 'off',
-				'Open'   : 'on'
+				'Closed'         : 'off',
+				'Open'           : 'on',
+				'In_alarm'       : 'on',
+				'Closed_Trouble' : 'off',
+				'Open_Trouble'   : 'on',
+				'Closed_Memory'  : 'off',
+				'Open_Memory'    : 'on',
+				'Bypass'         : 'off',
+				'Closed_Trouble2': 'off',
+				'Open_Trouble2'  : 'on'
 			}
 		}
 	}
