@@ -17,6 +17,7 @@ class IP150_MQTT():
 			'map'   : {
 				'Disarmed'   : 'disarmed',
 				'Armed'      : 'armed_away',
+				'Triggered'  : 'triggered',
 				'Armed_sleep': 'armed_home',
 				'Armed_stay' : 'armed_home',
 				'Entry_delay': 'pending',
