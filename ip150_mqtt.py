@@ -21,7 +21,8 @@ class IP150_MQTT():
 				'Armed_sleep': 'armed_home',
 				'Armed_stay' : 'armed_home',
 				'Entry_delay': 'pending',
-				'Exit_delay' : 'pending'
+				'Exit_delay' : 'pending',
+				'Ready'      : 'disarmed'
 			}
 		},
 		'zones_status' : {
