@@ -9,6 +9,7 @@
 
 	"ALARM_PUBLISH_TOPIC"   : "paradox/alarm/state",
 	"ALARM_SUBSCRIBE_TOPIC" : "paradox/alarm/cmnd",
+	"ZONE_PUBLISH_TOPIC"    : "paradox/zone/state",
 	"CTRL_PUBLISH_TOPIC"    : "paradox/ctrl/state",
 	"CTRL_SUBSCRIBE_TOPIC"  : "paradox/ctrl/cmnd"
 }
