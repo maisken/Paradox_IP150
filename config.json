@@ -4,6 +4,7 @@
   "slug": "paradox_ip150_mqtt",
   "description": "Expose an MQTT interface for the Paradox IP150 web interface",
   "url": "https://github.com/alfredopironti/Paradox_IP150",
+  "arch": ["amd64"],
   "startup": "services",
   "boot": "auto",
   "options": {
