@@ -3,6 +3,7 @@
   "version": "0.5",
   "slug": "paradox_ip150_mqtt",
   "description": "Expose an MQTT interface for the Paradox IP150 web interface",
+  "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
   "url": "https://github.com/alfredopironti/Paradox_IP150",
   "startup": "services",
   "boot": "auto",
