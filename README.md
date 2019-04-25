@@ -41,7 +41,7 @@ alarm_control_panel:
     payload_disarm: “DISARM”
     payload_arm_home: “ARM_HOME”
     payload_arm_away: “ARM_AWAY”
-#ARM_HOME = ARM_sleep @Line38 ip150.mqtt.py
+#ARM_HOME = Arm_sleep @Line48 ip150.mqtt.py -- this will change in future releases
 ```
 #### configuration.yaml - Configuring PIR sensors (optional)
 ```
