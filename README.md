@@ -30,24 +30,31 @@ Make sure you have an MQTT broker running, for instance by using Hass.io integra
 #### configuration.yaml - Configuring the alarm control panel
 ```
 alarm_control_panel:
-
-platform: mqtt
-name: House Paradox
-state_topic: “paradox/alarm/state/1”
-command_topic: “paradox/alarm/cmnd/1”
-payload_disarm: “DISARM”
-payload_arm_home: “ARM_HOME”
-payload_arm_away: “ARM_AWAY”
+  - platform: mqtt
+    name: "House Paradox"
+    state_topic: “paradox/alarm/state/1”
+    command_topic: “paradox/alarm/cmnd/1”
+    qos: 1
+    availability_topic: "paradox/ctrl/state"
+    payload_available: "Connected"
+    payload_not_available: "Disconnected"
+    payload_disarm: “DISARM”
+    payload_arm_home: “ARM_HOME”
+    payload_arm_away: “ARM_AWAY”
 #ARM_HOME = ARM_sleep @Line38 ip150.mqtt.py
 ```
 #### configuration.yaml - Configuring PIR sensors (optional)
 ```
-platform: mqtt
-state_topic: “paradox/zone/state/2”
-name: “Study”
-qos: 0
-payload_on: “on”
-payload_off: “off”
+binary-sensor:
+  - platform: mqtt
+    state_topic: “paradox/zone/state/2”
+    name: “Study”
+    qos: 1
+    payload_on: “on”
+    payload_off: “off”
+    availability_topic: "paradox/ctrl/state"
+    payload_available: "Connected"
+    payload_not_available: "Disconnected"
 #Repeat for other Zones/Openings in your setup
 ```
 #### Hass.io: add-on configuration details => Paradox IP150MQTT Adapter (web based configuration)
