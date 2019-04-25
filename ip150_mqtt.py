@@ -43,9 +43,10 @@ class IP150_MQTT():
 	}
 
 	_alarm_action_map = {
-		'DISARM': 'Disarm',
-		'ARM_AWAY': 'Arm',
-		'ARM_HOME': 'Arm_sleep'
+		'DISARM'	: 'Disarm',
+		'ARM_AWAY'	: 'Arm',
+		'ARM_NIGHT'	: 'Arm_sleep',
+		'ARM_HOME'	: 'Arm_stay'
 		}
 
 	def __init__(self, opt_file):
