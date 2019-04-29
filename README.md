@@ -43,6 +43,16 @@ alarm_control_panel:
     payload_arm_away: “ARM_AWAY”
 #ARM_HOME = Arm_sleep @Line48 ip150.mqtt.py -- this will change in future releases
 ```
+#### Lovelace card for the alarm control panel
+```
+type: alarm-panel
+states:
+  - arm_home
+  - arm_away
+entity: alarm_control_panel.house_paradox
+name: Alarm
+```
+
 #### configuration.yaml - Configuring PIR sensors (optional)
 ```
 binary-sensor:
