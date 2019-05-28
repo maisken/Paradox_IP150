@@ -16,10 +16,11 @@ This add-on will run an mqtt interface for the Paradox ip150 module, via the ip1
 
 You can try it out by getting ssh access to your hassio installation, then
 
-    cd /addons/local
+    cd /addons
     git clone https://github.com/alfredopironti/Paradox_IP150.git paradox_ip150_mqtt
 
-(on older versions of hass.io, you could do this from the /addons directory, but recent versions need it in the /addons/local directory)
+If installing in the /addons directory does not work, please try using the
+/addons/local directory, as different users seem to have different mileage on this.
 
 Then go to the homeassistant home page: click on Hass.io in the menu; then on the add-on store tab.
 The add-on should appear in the local add-ons list.
@@ -30,7 +31,14 @@ There is currently no logging displayed from the hass.io addon when the addon is
 
 ### Basic configuration should allow you to get going:
 
-Make sure you have an MQTT broker running, for instance by using Hass.io integrations. Then:
+Make sure you have an MQTT broker running, for instance by using Hass.io integrations.
+Also, the IP150 module only works with a self-signed certificate, which offers little protection over plaintext.
+Hence, the recommended setup is to:
+- Disable remote access to the IP150 module on your router
+- Configure the IP150 module to work via HTTP (port 80)
+- You can still arm, disarm and see if the alarm triggered via the Home Assistant interface, which can be securely accessed remotely
+
+Then:
 
 #### Hass.io: add-on configuration details => Paradox IP150MQTT Adapter (web based configuration)
 ```
