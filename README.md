@@ -72,6 +72,9 @@ alarm_control_panel:
     payload_arm_home: “ARM_HOME”
     payload_arm_away: “ARM_AWAY”
     payload_arm_night: “ARM_NIGHT”
+#ARM_HOME = Arm_stay
+#ARM_AWAY = Arm
+#ARM_NIGHT = Arm_sleep
 ```
 #### Lovelace card for the alarm control panel
 ```
