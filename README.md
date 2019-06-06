@@ -71,7 +71,7 @@ alarm_control_panel:
     payload_disarm: “DISARM”
     payload_arm_home: “ARM_HOME”
     payload_arm_away: “ARM_AWAY”
-#ARM_HOME = Arm_sleep @Line48 ip150.mqtt.py -- this will change in future releases
+    payload_arm_night: “ARM_NIGHT”
 ```
 #### Lovelace card for the alarm control panel
 ```
@@ -79,6 +79,7 @@ type: alarm-panel
 states:
   - arm_home
   - arm_away
+  - arm_night
 entity: alarm_control_panel.house_paradox
 name: Alarm
 ```

@@ -18,7 +18,7 @@ class IP150_MQTT():
 				'Disarmed'   : 'disarmed',
 				'Armed'      : 'armed_away',
 				'Triggered'  : 'triggered',
-				'Armed_sleep': 'armed_home',
+				'Armed_sleep': 'armed_night',
 				'Armed_stay' : 'armed_home',
 				'Entry_delay': 'pending',
 				'Exit_delay' : 'pending',
@@ -45,7 +45,8 @@ class IP150_MQTT():
 	_alarm_action_map = {
 		'DISARM': 'Disarm',
 		'ARM_AWAY': 'Arm',
-		'ARM_HOME': 'Arm_sleep'
+		'ARM_HOME': 'Arm_stay',
+		'ARM_NIGHT': 'Arm_sleep'
 		}
 
 	def __init__(self, opt_file):
