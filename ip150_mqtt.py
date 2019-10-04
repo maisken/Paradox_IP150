@@ -127,6 +127,8 @@ class IP150_MQTT():
 		mqc.username_pw_set(self._cfg['MQTT_USERNAME'], self._cfg['MQTT_PASSWORD'])
 		mqc.will_set(*self._will)
 
+# set the CA file
+		mqc.tls_set(ca_certs='/ssl/'+self._cfg['MQTT_CACERTS'])		
 		mqc.connect(mqtt_hostname, mqtt_port)
 
 		mqc.loop_forever()
