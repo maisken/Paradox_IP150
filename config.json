@@ -1,11 +1,11 @@
 {
   "name": "Paradox IP150 MQTT Adapter",
-  "version": "0.7",
+  "version": "1.0",
   "slug": "paradox_ip150_mqtt",
   "description": "Expose an MQTT interface for the Paradox IP150 web interface",
   "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
   "image": "maisken/paradox-ip150-{arch}",
-  "url": "https://github.com/alfredopironti/Paradox_IP150",
+  "url": "https://github.com/maisken/Paradox_IP150",
   "startup": "services",
   "boot": "auto",
   "options": {
