@@ -12,3 +12,5 @@ simplegeneric==0.8.1
 six==1.12.0
 traitlets==4.3.2
 wcwidth==0.1.7
+Click==7.0
+pur==5.2.2
