@@ -4,30 +4,24 @@ Hassio add-on, Python and MQTT bindings for controlling a Paradox alarm via the 
 # Dependencies
 For best results, requires a Paradox IP150S with a firmware below 4.x. 1.x seems to work the best. It is worth considering to have your IP150S use the DNS from your router and then block access to 54.165.77.37 and upgrade.insightgoldatpmh.com as IP150's have been known to upgrade their firmware automatically.
 
-# Paradox_IP150 Docker addon for HASS.IO
+# Paradox_IP150 Docker add-on for HASS.IO
 
 # Support for this Plugin can be found at:
 
 https://community.home-assistant.io/t/paradox-alarm-mqtt-hassio-addon/38569
 
-## This currently only supports manual install:
+# Installation
+From the Home Assistant home page, click on the Hass.io menu item, then go the Add-on Store tab.
 
-This add-on will run an mqtt interface for the Paradox ip150 module, via the ip150 web interface.
+Add a repository with the following URL:
 
-You can try it out by getting ssh access to your hassio installation, then
+https://github.com/maisken/hassio-addons
 
-    cd /addons
-    git clone https://github.com/alfredopironti/Paradox_IP150.git paradox_ip150_mqtt
+Once you have enabled the repository, the Paradox IP150 MQTT Adapter add-on should become available for installation.
 
-If installing in the /addons directory does not work, please try using the
-/addons/local directory, as different users seem to have different mileage on this.
+After installing the add-on, make sure to configure it. As a minimum, configure the IP address of your MQTT broker and ip150 module, set panel code and password, and you should be good to go.
 
-Then go to the homeassistant home page: click on Hass.io in the menu; then on the add-on store tab.
-The add-on should appear in the local add-ons list.
-
-Configure the IP address of your mqtt broker and ip150 module, set panel code and password, and you should be good to go.
-
-There is currently no logging displayed from the hass.io addon when the addon is working correctly. Errors for the hass.io addon are only displayed when the addon is configured incorrectly.
+There is currently no logging displayed from the hass.io add-on when the add-on is working correctly. Errors for the hass.io add-on are only displayed when the add-on is configured incorrectly.
 
 ### Basic configuration should allow you to get going:
 
@@ -68,10 +62,6 @@ alarm_control_panel:
     availability_topic: "paradox/ctrl/state"
     payload_available: "Connected"
     payload_not_available: "Disconnected"
-    payload_disarm: “DISARM”
-    payload_arm_home: “ARM_HOME”
-    payload_arm_away: “ARM_AWAY”
-#ARM_HOME = Arm_sleep @Line48 ip150.mqtt.py -- this will change in future releases
 ```
 #### Lovelace card for the alarm control panel
 ```
@@ -97,4 +87,3 @@ binary-sensor:
     payload_not_available: "Disconnected"
 #Repeat for other Zones/Openings in your setup
 ```
-
