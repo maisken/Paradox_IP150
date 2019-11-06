@@ -69,6 +69,7 @@ type: alarm-panel
 states:
   - arm_home
   - arm_away
+  - arm_night
 entity: alarm_control_panel.house_paradox
 name: Alarm
 ```
