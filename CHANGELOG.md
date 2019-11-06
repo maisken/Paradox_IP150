@@ -1,7 +1,8 @@
 # 1.0 - 2019-11-06
 - Add CHANGELOG
 - Update dependencies
-- Fix alarm state when in sleep/night mode
+- Fix arming in home mode rather than sleep mode when MQTT command is ARM_HOME
+- Fix alarm state reported to MQTT when in sleep/night mode
 
 # 0.7 - 2019-11-05
 - Create add-on repository
