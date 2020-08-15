@@ -20,7 +20,7 @@ class IP150_MQTT():
 				'Triggered'  : 'triggered',
 				'Armed_sleep': 'armed_night',
 				'Armed_stay' : 'armed_home',
-				'Entry_delay': 'disarming',
+				'Entry_delay': 'pending',
 				'Exit_delay' : 'arming',
 				'Ready'      : 'disarmed'
 			}
