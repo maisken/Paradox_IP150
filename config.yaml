@@ -14,26 +14,26 @@ startup: "services"
 boot: "auto"
 panel_icon: "mdi:shield-home"
 options:
- IP150_ADDRESS: "http://127.0.0.1",
- PANEL_CODE" : "null",
- PANEL_PASSWORD" : "null",
- MQTT_ADDRESS" : "mqtt://127.0.0.1",
- MQTT_USERNAME" : "MQTT_user",
- MQTT_PASSWORD" : "MQTT_pwd",
- ALARM_PUBLISH_TOPIC"   : "paradox/alarm/state",
- ALARM_SUBSCRIBE_TOPIC" : "paradox/alarm/cmnd",
- ZONE_PUBLISH_TOPIC"	: "paradox/zone/state",
- CTRL_PUBLISH_TOPIC"    : "paradox/ctrl/state",
- CTRL_SUBSCRIBE_TOPIC"  : "paradox/ctrl/cmnd"
+  IP150_ADDRESS: "http://127.0.0.1"
+  PANEL_CODE: "0000"
+  PANEL_PASSWORD: "password"
+  MQTT_ADDRESS: "mqtt://127.0.0.1"
+  MQTT_USERNAME: "MQTT_user"
+  MQTT_PASSWORD: "MQTT_pwd"
+  ALARM_PUBLISH_TOPIC: "paradox/alarm/state"
+  ALARM_SUBSCRIBE_TOPIC: "paradox/alarm/cmnd"
+  ZONE_PUBLISH_TOPIC: "paradox/zone/state"
+  CTRL_PUBLISH_TOPIC: "paradox/ctrl/state"
+  CTRL_SUBSCRIBE_TOPIC: "paradox/ctrl/cmnd"
 schema:
- IP150_ADDRESS" : "url",
- PANEL_CODE" : "password",
- PANEL_PASSWORD" : "password",
- MQTT_ADDRESS" : "url",
- MQTT_USERNAME" : "str",
- MQTT_PASSWORD" : "password",
- ALARM_PUBLISH_TOPIC"   : "str",
- ALARM_SUBSCRIBE_TOPIC" : "str",
- ZONE_PUBLISH_TOPIC"	: "str",
- CTRL_PUBLISH_TOPIC"    : "str",
- CTRL_SUBSCRIBE_TOPIC"  : "str"
+  IP150_ADDRESS: "url"
+  PANEL_CODE: "password"
+  PANEL_PASSWORD: "password"
+  MQTT_ADDRESS: "url"
+  MQTT_USERNAME: "str"
+  MQTT_PASSWORD: "password"
+  ALARM_PUBLISH_TOPIC: "str"
+  ALARM_SUBSCRIBE_TOPIC: "str"
+  ZONE_PUBLISH_TOPIC: "str"
+  CTRL_PUBLISH_TOPIC: "str"
+  CTRL_SUBSCRIBE_TOPIC: "str"
