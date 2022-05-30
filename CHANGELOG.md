@@ -1,3 +1,6 @@
+# 1.2 - 2022-05-31
+- Update dependencies and add-on metadata
+
 # 1.1 - 2020-08-14
 - Distinguish 'pending' and 'arming' states
 
