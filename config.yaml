@@ -9,6 +9,7 @@ arch:
   - amd64
   - i386
 image: "maisken/paradox-ip150-{arch}"
+init: false
 url: "https://github.com/maisken/Paradox_IP150"
 startup: "services"
 boot: "auto"
