@@ -53,9 +53,9 @@ Then:
 
 #### configuration.yaml - Configuring the alarm control panel
 ```
-alarm_control_panel:
-  - platform: mqtt
-    name: "House Paradox"
+mqtt:
+  alarm_control_panel:
+  - name: "House Paradox"
     state_topic: "paradox/alarm/state/1"
     command_topic: "paradox/alarm/cmnd/1"
     qos: 1
@@ -76,9 +76,9 @@ name: Alarm
 
 #### configuration.yaml - Configuring PIR sensors (optional)
 ```
-binary_sensor:
-  - platform: mqtt
-    state_topic: "paradox/zone/state/2"
+ section
+  binary_sensor:
+  - state_topic: "paradox/zone/state/2"
     name: "Study"
     qos: 1
     payload_on: "on"
