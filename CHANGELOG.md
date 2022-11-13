@@ -1,3 +1,9 @@
+# 1.3 - 2022-11-13
+- Update dependencies and add-on metadata
+- Handle connection timeouts to Paradox web interface
+- Add logging
+- Paradox web interface refresh rate is configurable by user
+
 # 1.2 - 2022-05-31
 - Update dependencies and add-on metadata
 
