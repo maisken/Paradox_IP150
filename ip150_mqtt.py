@@ -1,5 +1,6 @@
 import argparse
 import json
+import logging
 import urllib.parse
 
 import paho.mqtt.client as mqtt
@@ -52,9 +53,19 @@ class IP150_MQTT():
 		}
 
 	def __init__(self, opt_file):
+		self._cfg = {}
 		with opt_file:
 			self._cfg = json.load(opt_file)
-			self._will = (self._cfg['CTRL_PUBLISH_TOPIC'], 'Disconnected', 1, True)
+		log_level = getattr(logging, str(self._cfg['LOG_LEVEL']).upper(), None)
+		log_error = False
+		if not isinstance(log_level, int):
+			log_error = True
+			log_level = logging.WARNING
+		logging.basicConfig(level=log_level)
+		if log_error:
+			# Can't log this before, as we need to call basicConfig first
+			logging.warning('Wrong log level provided: "{}". Overriding with WARNING.'.format(self._cfg['LOG_LEVEL']))
+		self._will = (self._cfg['CTRL_PUBLISH_TOPIC'], 'Disconnected', 1, True)
 
 	def on_paradox_new_state(self, state, client):
 		for d1 in state.keys():
@@ -66,9 +77,9 @@ class IP150_MQTT():
 						client.publish(self._cfg[d1_map['topic']]+'/'+str(d2[0]), publish_state, 1, True)
 
 	def on_paradox_update_error(self, e, client):
-		# We try to do a proper shutdow,
+		# We try to do a proper shutdown,
 		# like if the user asked us to disconnect via MQTT
-		#TODO: log the exception
+		logging.warning('Error getting Paradox status update. Doing clean shutdown. Error details: {}'.format(e))
 		self.mqtt_ctrl_disconnect(client)
 
 	def on_mqtt_connect(self, client, userdata, flags, rc):
@@ -79,7 +90,7 @@ class IP150_MQTT():
 
 		client.publish(self._cfg['CTRL_PUBLISH_TOPIC'], 'Connected', 1, True)
 
-		self.ip.get_updates(self.on_paradox_new_state, self.on_paradox_update_error, client)
+		self.ip.get_updates(on_update=self.on_paradox_new_state, on_error=self.on_paradox_update_error, userdata=client, poll_interval=self._cfg['REFRESH_RATE'])
 
 
 	def on_mqtt_alarm_message(self, client, userdata, message):

@@ -1,6 +1,7 @@
 import functools
 import hashlib
 import json
+import logging
 import re
 import threading
 import time
@@ -22,8 +23,13 @@ class KeepAlive(threading.Thread):
         self.stopped = threading.Event()
 
     def _one_keepalive(self):
-        requests.get('{}/keep_alive.html'.format(
-            self.ip150url), params={'msgid': 1}, verify=False)
+        try:
+            requests.get('{}/keep_alive.html'.format(
+                self.ip150url), params={'msgid': 1}, verify=False, timeout=(self.interval/2,self.interval))
+        except requests.Timeout as t:
+            # This keepalive didn't go through. No big deal.
+            # We log it and move on; we'll keepalive the next time we're called.
+            logging.debug('Keepalive request timed out: {}'.format(t))
 
     def run(self):
         while not self.stopped.wait(self.interval):
@@ -158,6 +164,7 @@ class Paradox_IP150:
             self._keepalive = KeepAlive(self.ip150url, keep_alive_interval)
             self._keepalive.start()
         self.logged_in = True
+        logging.info("Successfully logged into the Paradox web interface.")
 
     @_logged_only
     def logout(self):
@@ -173,16 +180,30 @@ class Paradox_IP150:
         if logout.status_code != 200:
             raise Paradox_IP150_Error('Error logging out')
         self.logged_in = False
+        logging.info("Logged out from the Paradox web interface.")
 
     def _js2array(self, varname, script):
         res = re.search('{} = new Array\((.*?)\);'.format(varname), script)
         res = '[{}]'.format(res.group(1))
         return json.loads(res)
 
+    def _retry_get(self, url, params=None, **kwargs):
+        retries = 5
+        result = None
+        while result == None and retries > 0:
+            try:
+                result = requests.get(url, params=params, **kwargs)
+            except requests.Timeout as t:
+                retries = retries-1
+                logging.debug('GET request timed out. {} attempts left: {}'.format(retries, t))
+        if retries == 0:
+            raise Paradox_IP150_Error('GET request permanently timed out.')
+        return result
+
     @_logged_only
-    def get_info(self):
-        status_page = requests.get(
-            '{}/statuslive.html'.format(self.ip150url), verify=False)
+    def get_info(self, timeout):
+        status_page = self._retry_get(
+            '{}/statuslive.html'.format(self.ip150url), verify=False, timeout=(timeout/2,timeout))
         status_parsed = BeautifulSoup(status_page.text, 'html.parser')
         if status_parsed.find('form', attrs={'name': 'statuslive'}) is None:
             raise Paradox_IP150_Error('Could not retrieve status information')
@@ -201,7 +222,7 @@ class Paradox_IP150:
 
             while not self._stop_updates.wait(interval):
                 updated_state = {}
-                cur_state = self.get_info()
+                cur_state = self.get_info(interval)
                 for d1 in cur_state.keys():
                     if d1 in prev_state:
                         for cur_d2, prev_d2 in zip(cur_state[d1], prev_state[d1]):
@@ -250,6 +271,6 @@ class Paradox_IP150:
         if action not in self._areas_action_map:
             raise Paradox_IP150_Error('Invalid action "{}" provided. Valid actions are {}'.format(action, list(self._areas_action_map.keys())))
         action = self._areas_action_map[action]
-        act_res = requests.get('{}/statuslive.html'.format(self.ip150url), params={'area': '{:02d}'.format(area), 'value': action}, verify=False)
+        act_res = self._retry_get('{}/statuslive.html'.format(self.ip150url), params={'area': '{:02d}'.format(area), 'value': action}, verify=False, timeout=3.0)
         if act_res.status_code != 200:
             raise Paradox_IP150_Error('Error setting the area action')
