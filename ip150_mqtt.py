@@ -1,8 +1,10 @@
-import ip150
-import paho.mqtt.client as mqtt
 import argparse
 import json
 import urllib.parse
+
+import paho.mqtt.client as mqtt
+
+import ip150
 
 
 class IP150_MQTT_Error(Exception):
